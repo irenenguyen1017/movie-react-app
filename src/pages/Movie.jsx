@@ -1,8 +1,10 @@
-function Movie() {
+import BaseLayout from "../layouts/Base";
+
+const Movie = () => {
     return (
-        <div>
+        <BaseLayout>
             <p>This is the movie page</p>
-        </div>
+        </BaseLayout>
     )
 }
 
