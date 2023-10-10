@@ -1,8 +1,10 @@
-function Search() {
+import BaseLayout from "../layouts/Base";
+
+const Search = () => {
     return (
-        <div>
+        <BaseLayout>
             <p>This is the search page</p>
-        </div>
+        </BaseLayout>
     )
 }
 

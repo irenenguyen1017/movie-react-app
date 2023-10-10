@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
+import BaseLayout from "../layouts/Base";
+import MovieCard from "../components/MovieCard";
+import MovieContainer from "../components/MovieContainer";
 
-function Home() {
+const Home = () => {
     const [data, setData]  = useState([]);
 
     useEffect(() => {
@@ -11,17 +14,20 @@ function Home() {
             .then(response => setData(response.results))
             .catch(err => console.error(err));
     }, [])
+    console.log(data)
+    const renderMovie = (movie, index) => {
+        return (
+            <MovieCard key={`movie-card-${index}`} id={movie.id} title={movie.title} description={movie.overview} imageName={movie.poster_path} />
+        )
+    }
 
     return (
-        <div>
-            <p>This is the Home page</p>
-        </div>
+        <BaseLayout>
+            <MovieContainer>
+                {data.map(renderMovie)}
+            </MovieContainer>
+        </BaseLayout>
     )
 }
-
-
-
-
-
 
 export default Home;
