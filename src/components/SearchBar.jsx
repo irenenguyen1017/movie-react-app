@@ -1,9 +1,12 @@
 import {useState} from 'react'
-import { useNavigate, createSearchParams } from 'react-router-dom';
+import { useNavigate, createSearchParams, useLocation, useSearchParams} from 'react-router-dom';
 
 const SearchBar = () => {
     const [input, setInput] = useState('');
     const navigate = useNavigate();
+    const {pathname} = useLocation();
+    const [searchParams, setSearchParams] = useSearchParams()
+    console.log(pathname)
 
     const onchangeHandler = (e) => {
         setInput(e.target.value);
@@ -11,10 +14,14 @@ const SearchBar = () => {
 
     const keyPressHandler = (e) => {
         if (input.length > 0 && e.key === 'Enter') {
-            navigate({
-                pathname: 'search',
-                search: createSearchParams({query: input}).toString()
-            });
+            if (pathname === '/search') {
+                setSearchParams(createSearchParams({query: input}).toString())
+            } else {
+                navigate({
+                    pathname: 'search',
+                    search: createSearchParams({query: input}).toString()
+                });
+            }
         };
     };
 
