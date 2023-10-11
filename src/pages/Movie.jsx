@@ -1,9 +1,9 @@
-import BaseLayout from "../layouts/Base";
+import BaseLayout from "../layouts/BaseLayout";
 
 const Movie = () => {
     return (
         <BaseLayout>
-            <p>This is the movie page</p>
+            <p>This is the movie's details page</p>
         </BaseLayout>
     )
 }
