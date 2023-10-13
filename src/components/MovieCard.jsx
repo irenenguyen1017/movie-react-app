@@ -5,9 +5,11 @@ import { getImageUrl } from '../utils';
 const MovieCard = ({ id, imageName, title, description }) => {
   return (
     <div className='card w-full bg-base-100 shadow-xl'>
-      <figure>
-        <img src={getImageUrl(imageName)} alt={`Film Poster Coming Soon`} />
-      </figure>
+      {imageName && (
+        <figure>
+          <img src={getImageUrl(imageName)} alt={`Film Poster Coming Soon`} />
+        </figure>
+        )}
       <div className='card-body'>
         <h2 className='card-title bg-gradient-to-r from-secondary to-accent bg-clip-text text-transparent'>
           {title}
