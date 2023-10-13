@@ -14,13 +14,24 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint": "eslint src/**/*.js{,x}"
+    "lint": "eslint src/**/*.{js,jsx}",
+    "format": "prettier --write src/**/*.{js,jsx} --config ./.prettierrc"
   },
   "eslintConfig": {
     "extends": [
       "react-app",
-      "react-app/jest"
-    ]
+      "react-app/jest",
+      "prettier"
+    ],
+    "env": {
+      "es6": true,
+      "jest": true,
+      "browser": true
+    },
+    "rules": {
+      "react/jsx-indent": [1, 2],
+      "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
+    }
   },
   "browserslist": {
     "production": [
@@ -39,6 +50,8 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "daisyui": "^3.9.2",
+    "eslint-config-prettier": "^9.0.0",
+    "prettier": "^3.0.3",
     "prop-types": "^15.8.1",
     "tailwindcss": "^3.3.3"
   }
