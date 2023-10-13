@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import BaseLayout from '../layouts/BaseLayout';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import MovieCard from '../components/MovieCard';
@@ -13,7 +13,7 @@ const Search = () => {
   const [loading, setLoading] = useState(false);
   const searchQuery = searchParams.get('query');
 
-  const searchMovies = query => {
+  const searchMovies = useCallback(query => {
     const options = {
       method: 'GET',
       headers: {
@@ -30,7 +30,7 @@ const Search = () => {
       .then((response) => response.json())
       .then((response) => setData(response.results))
       .catch(() => navigate('/')).finally(() => setLoading(false));
-  }
+  }, [navigate])
 
   const renderMovie = (movie, index) => {
     return (
@@ -66,7 +66,7 @@ const Search = () => {
 
   useEffect(() => {
     searchMovies(searchQuery)
-  }, [searchQuery]);
+  }, [searchMovies, searchQuery]);
 
   return (
     <BaseLayout>
