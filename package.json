@@ -2,7 +2,7 @@
   "name": "movie-react-app",
   "version": "0.1.0",
   "private": true,
-  "home": "https://irenenguyen1017.github.io/movie-react-app",
+  "home": "https://irenenguyen1017.github.io/movie-react-app/",
   "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
