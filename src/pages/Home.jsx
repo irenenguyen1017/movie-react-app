@@ -13,7 +13,7 @@ const Home = () => {
 
   const setCurrentPage = () => setPage((c) => c + 1);
 
-  const fetchMovies = (p) => {
+  const fetchMovies = p => {
     const options = { method: 'GET', headers: { accept: 'application/json' } };
 
     setLoading(true);
