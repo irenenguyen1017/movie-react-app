@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "CineHub",
+  "name": "A movie listing website is your go-to source for discovering and exploring a vast array of films, from classic favorites to the latest releases.",
   "icons": [
     {
       "src": "favicon.ico",
