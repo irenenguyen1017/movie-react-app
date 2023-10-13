@@ -2,6 +2,7 @@
   "name": "movie-react-app",
   "version": "0.1.0",
   "private": true,
+  "home": "https://irenenguyen1017.github.io/movie-react-app",
   "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -11,11 +12,14 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "prebuild": "npm run lint && npm run format",
     "build": "react-scripts build",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint src/**/*.{js,jsx}",
-    "format": "prettier --write src/**/*.{js,jsx} --config ./.prettierrc"
+    "format": "prettier --write **/*.{js,jsx,md} --config ./.prettierrc"
   },
   "eslintConfig": {
     "extends": [
@@ -29,8 +33,19 @@
       "browser": true
     },
     "rules": {
-      "react/jsx-indent": [1, 2],
-      "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
+      "react/jsx-indent": [
+        1,
+        2
+      ],
+      "react/jsx-filename-extension": [
+        1,
+        {
+          "extensions": [
+            ".js",
+            ".jsx"
+          ]
+        }
+      ]
     }
   },
   "browserslist": {
@@ -51,6 +66,7 @@
     "@testing-library/user-event": "^13.5.0",
     "daisyui": "^3.9.2",
     "eslint-config-prettier": "^9.0.0",
+    "gh-pages": "^6.0.0",
     "prettier": "^3.0.3",
     "prop-types": "^15.8.1",
     "tailwindcss": "^3.3.3"
