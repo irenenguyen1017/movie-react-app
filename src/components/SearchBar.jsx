@@ -2,10 +2,10 @@ import { useState } from 'react';
 import { useNavigate, createSearchParams, useLocation, useSearchParams } from 'react-router-dom';
 
 const SearchBar = () => {
-  const [input, setInput] = useState('');
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [input, setInput] = useState(searchParams.get('query') ?? '');
   const navigate = useNavigate();
   const { pathname } = useLocation();
-  const [, setSearchParams] = useSearchParams();
 
   const onchangeHandler = (e) => {
     setInput(e.target.value);

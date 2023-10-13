@@ -1,16 +1,19 @@
 import { useEffect, useState } from 'react';
 import BaseLayout from '../layouts/BaseLayout';
-import { useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import MovieCard from '../components/MovieCard';
 import SearchBar from '../components/SearchBar';
 import MovieContainer from '../components/MovieContainer';
+import LoadingIndicator from '../components/LoadingIndicator';
 
 const Search = () => {
   const [data, setData] = useState([]);
   const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
   const searchQuery = searchParams.get('query');
 
-  useEffect(() => {
+  const searchMovies = query => {
     const options = {
       method: 'GET',
       headers: {
@@ -18,14 +21,16 @@ const Search = () => {
       },
     };
 
+    setLoading(true)
+
     fetch(
-      `${process.env.REACT_APP_API_URL}search/movie?include_adult=false&language=en-US&page=1&query=${searchQuery}&api_key=${process.env.REACT_APP_API_KEY}`,
+      `${process.env.REACT_APP_API_URL}search/movie?include_adult=false&language=en-US&page=1&query=${query}&api_key=${process.env.REACT_APP_API_KEY}`,
       options,
     )
       .then((response) => response.json())
       .then((response) => setData(response.results))
-      .catch((err) => console.error(err));
-  }, [searchQuery]);
+      .catch(() => navigate('/')).finally(() => setLoading(false));
+  }
 
   const renderMovie = (movie, index) => {
     return (
@@ -39,18 +44,34 @@ const Search = () => {
     );
   };
 
-  return (
-    <BaseLayout>
-      <SearchBar />
-      {data.length === 0 ? (
+  const renderContent = () => {
+    if (loading) {
+      return <LoadingIndicator />
+    }
+
+    if (searchQuery && data.length === 0) {
+      return (
         <div className='flex justify-center'>
           <h1 className='font-sans font-light text-3xl text-dark-500 max-w-[500px] text-center mt-20'>
             We're sorry, but it seems we couldn't find any movies that match your search criteria.
           </h1>
         </div>
-      ) : (
-        <MovieContainer>{data.map(renderMovie)}</MovieContainer>
-      )}
+      )
+    }
+
+    return (
+      <MovieContainer>{data.map(renderMovie)}</MovieContainer>
+    )
+  }
+
+  useEffect(() => {
+    searchMovies(searchQuery)
+  }, [searchQuery]);
+
+  return (
+    <BaseLayout>
+      <SearchBar />
+      {renderContent()}
     </BaseLayout>
   );
 };
